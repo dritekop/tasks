@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 struct stack {
 	size_t size;
@@ -19,10 +18,11 @@ struct stack create(size_t size, int* x) {
 void push(int x, struct stack* stk) {
 	stk->size += 1;
 	int index = stk->size - 1;
+	
 	if ( stk->size > stk->capacity ) {
 		stk->capacity = stk->size;
-		stk->elements = realloc(stk->elements, sizeof(int)*(stk->size + 1));
 	}
+
 	*(stk->elements + index) = x;
 }
 
@@ -33,8 +33,26 @@ int pop(struct stack* stk) {
 	return element;
 }
 
-void resize(int x, struct stack* stk) {
+size_t size(struct stack* stk) {
+	return stk->size;
+}
+
+size_t capacity(struct stack* stk) {
+	return stk->capacity;
+}
+
+void Resize(int x, struct stack* stk) {
+	if ( (int)stk->capacity + x <= 0 ) {
+        stk->capacity = 0;
+        stk->size = 0;
+        return;
+    }
+    
 	stk->capacity += x;
+    
+	if ( stk->capacity < stk->size ) {
+        stk->size = stk->capacity;
+    }
 }
 
 int main() {
@@ -42,14 +60,21 @@ int main() {
 	
 	struct stack stk = create(3, array);
 	
-	printf("%d - stk.size %d - stk.capacity\n", stk.size, stk.capacity);
-	// printf("%d - pop(&stk), %d - stk.size\n", pop(&stk), stk.size);
-	resize(5, &stk);
-	printf("% d - stk.size %d - stk.capacity : after resize(5, &stk)\n", stk.size, stk.capacity);
+	printf("%lu - stk.size %lu - stk.capacity\n", size(&stk), capacity(&stk));
+
+	Resize(-1, &stk);
+	printf("%lu - stk.size %lu - stk.capacity : after resize(-1, &stk)\n", size(&stk), capacity(&stk));
+	
+	Resize(5, &stk);
+	printf("%lu - stk.size %lu - stk.capacity : after resize(5, &stk)\n", size(&stk), capacity(&stk));
+	
 	push(123, &stk);
-	// printf("%d - pop(&stk), %d - stk.size, %d - stk.capacity\n", pop(&stk), stk.size, stk.capacity);
-	for ( ; stk.size != 0; stk.size -- ) {
-		printf("%d - pop(&stk), %d element\n", pop(&stk), stk.size);
+	printf("push(123, &stk)\n");
+	
+	for ( ; stk.size != 0; stk.size-- ) {
+		printf("%d - pop(&stk), %lu element\n", pop(&stk), size(&stk));
 	}
-	printf("%d - stk.size %d - stk.capacity\n", stk.size, stk.capacity);
+	printf("%lu - stk.size %lu - stk.capacity\n", size(&stk), capacity(&stk));
+
+	return 0;
 }
