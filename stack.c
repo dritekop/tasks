@@ -27,8 +27,8 @@ void push(int x, struct stack* stk) {
 }
 
 int pop(struct stack* stk) {
-	int index = stk->size - 1;
-	int element = stk->elements[index];
+	stk->size -= 1;
+	int element = stk->elements[stk->size];
 	
 	return element;
 }
@@ -57,8 +57,9 @@ void Resize(int x, struct stack* stk) {
 
 int main() {
 	int array[3] = { 10, 8, 7 };
+	int length = sizeof(array)/sizeof(int);
 	
-	struct stack stk = create(3, array);
+	struct stack stk = create(length, array);
 	
 	printf("%lu - stk.size %lu - stk.capacity\n", size(&stk), capacity(&stk));
 
@@ -71,7 +72,7 @@ int main() {
 	push(123, &stk);
 	printf("push(123, &stk)\n");
 	
-	for ( ; stk.size != 0; stk.size-- ) {
+	for ( int i = stk.size; i != 0; i-- ) {
 		printf("%d - pop(&stk), %lu element\n", pop(&stk), size(&stk));
 	}
 	printf("%lu - stk.size %lu - stk.capacity\n", size(&stk), capacity(&stk));
