@@ -1,16 +1,21 @@
 #include <stdio.h>
 
-int fibonacciSum(int n) {
+int fibonacci(int n) {
     if ( n == 1 ) {
         return 1;
     }
     if ( n > 0 ) {
-        return (fibonacciSum(n-1) + fibonacciSum(n-2));
+        return (fibonacci(n-1) + fibonacci(n-2));
     }
     if ( n < 0 ) {
-        return (fibonacciSum(n+2) - fibonacciSum(n+1));
+        return (fibonacci(n+2) - fibonacci(n+1));
     }
     return 0;
+}
+
+int fibonacciSum(int n) {
+    n += 2;
+    return fibonacci(n) - 1;
 }
 
 int main() {
@@ -18,7 +23,5 @@ int main() {
 
     scanf("%d", &index);
 
-    index += 2;
-
-    printf("%d", fibonacciSum(index) - 1);
+    printf("%d", fibonacciSum(index));
 }
