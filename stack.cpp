@@ -27,6 +27,7 @@ public:
 
     T pop() {
         if ( this->Capacity == 0 || this->Size == 0 ) {
+            std::cout << "Stack is empty." << std::endl;
             exit(0);
         }
         this->Capacity -= 1;
@@ -72,4 +73,5 @@ int main() {
     std::cout << st.capacity() << " " << st.pop() << " " << st.capacity() << std::endl;
     st.Resize(-12);
     std::cout << st.capacity() << " " << st.size() << std::endl;
+    st.pop();
 }
