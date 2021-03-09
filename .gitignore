@@ -7,6 +7,7 @@
 *.o
 *.obj
 *.so
+*.out
 stack2.c
 
 # Packages #

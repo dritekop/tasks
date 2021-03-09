@@ -23,9 +23,7 @@ char* fibonacciSum(int index) {
 int main() {
     int index;
 
-    scanf("%d", &index);
-
-    printf("%s\n", fibonacciSum(index));
+    printf("%s\n", fibonacciSum(1345));
 
     return 0;
 }

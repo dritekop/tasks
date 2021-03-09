@@ -19,9 +19,5 @@ int fibonacciSum(int n) {
 }
 
 int main() {
-    int index;
-
-    scanf("%d", &index);
-
-    printf("%d", fibonacciSum(index));
+    printf("%d\n", fibonacciSum(20));
 }
