@@ -1,6 +1,6 @@
 all: compile
-	fibonacciSum
-	fibonacciSumGmp
+	./fibonacciSum
+	./fibonacciSumGmp
 
 compile:
 	gcc fibonacciSum.c -std=c99 -o fibonacciSum
