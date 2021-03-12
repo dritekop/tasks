@@ -17,18 +17,20 @@ public:
     ~Stack() {};
 
     void push(T x) {
-        this->Capacity += 1;
-        if ( this->Capacity > this->Size ) {
-            this->Size = this->Capacity;
+        if ( this->Capacity + 1 > this->Size ) {
+            std::cout << "There is no place in the stack. Resize it." << std::endl;
+
+            return;
         }
+        this->Capacity += 1;
         int index = this->Capacity - 1;
         this->values[index] = x;
     }
 
     T pop() {
         if ( this->Capacity == 0 || this->Size == 0 ) {
-            std::cout << "Stack is empty." << std::endl;
-            exit(0);
+            std::cout << "The stack is empty." << std::endl;
+            exit(EXIT_FAILURE);
         }
         this->Capacity -= 1;
         int index = this->Capacity;
@@ -47,13 +49,11 @@ public:
     void Resize(int x) {
         int newSize = this->Size + x;
         if ( newSize <= 0 ) {
-            this->Size = 0;
-            this->Capacity = 0;
-
-            return; 
+            std::cout << "Invalid resize paramater." << std::endl;
+            exit(EXIT_FAILURE); 
         }
         this->Size = newSize;
-        this->Capacity = newSize;
+    
     }
 
     Stack operator=(const Stack& stk) = delete;
@@ -67,11 +67,22 @@ Stack<T> create(size_t size, T* array) {
 int main() {
     int x[] = { 9, 6, 7 };
     Stack<int> st = create(3, x);
-    std::cout << st.capacity() << " " << st.pop() << " " << st.capacity() << std::endl;
+
+    st.push(12);
+    for ( int i = st.capacity(); i != 0; i-- ) {
+        int a = st.capacity();
+        int b = st.pop();
+        int c = st.capacity();
+        std::cout << a << " " << b << " " << c << std::endl;
+    }
     st.push(65);
-    std::cout << st.capacity() << " " << st.pop() << " " << st.capacity() << std::endl;
-    std::cout << st.capacity() << " " << st.pop() << " " << st.capacity() << std::endl;
-    st.Resize(-12);
+    int a = st.capacity();
+    int b = st.pop();
+    int c = st.capacity();
+    
+    std::cout << a << " " << b << " " << c << std::endl;
+    
     std::cout << st.capacity() << " " << st.size() << std::endl;
-    st.pop();
+    // st.Resize(-12);
+    // st.pop();
 }
