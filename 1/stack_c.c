@@ -64,25 +64,25 @@ int main() {
     
     struct stack stk = create(length, length, array);
     
-    printf("%lu - stk.size %lu - stk.capacity\n", size(&stk), capacity(&stk));
+    printf("%zu - stk.size %zu - stk.capacity\n", size(&stk), capacity(&stk));
 
     Resize(-1, &stk);
-    printf("%lu - stk.size %lu - stk.capacity : after resize(-1, &stk)\n", size(&stk), capacity(&stk));
+    printf("%zu - stk.size %zu - stk.capacity : after resize(-1, &stk)\n", size(&stk), capacity(&stk));
     
     Resize(5, &stk);
-    printf("%lu - stk.size %lu - stk.capacity : after resize(5, &stk)\n", size(&stk), capacity(&stk));
+    printf("%zu - stk.size %zu - stk.capacity : after resize(5, &stk)\n", size(&stk), capacity(&stk));
     
     push(123, &stk);
     printf("push(123, &stk)\n");
     
     for ( int i = stk.capacity; i != 0; i-- ) {
-        int a = capacity(&stk);
+        size_t a = capacity(&stk);
         int b = pop(&stk);
-        int c = capacity(&stk);
-        int d = size(&stk);
-        printf("%d - capacity(&stk) before pop, %d - pop(&stk), %lu - capacity(&stk) after pop, %lu - size(&stk)\n", a, b, c, d);
+        size_t c = capacity(&stk);
+        size_t d = size(&stk);
+        printf("%zu - capacity(&stk) before pop, %d - pop(&stk), %zu - capacity(&stk) after pop, %zu - size(&stk)\n", a, b, c, d);
     }
-    printf("%lu - stk.size %lu - stk.capacity\n", stk.size, stk.capacity);
+    printf("%zu - stk.size %zu - stk.capacity\n", stk.size, stk.capacity);
 
     return 0;
 }

@@ -70,15 +70,15 @@ int main() {
 
     st.push(12);
     for ( int i = st.capacity(); i != 0; i-- ) {
-        int a = st.capacity();
+        size_t a = st.capacity();
         int b = st.pop();
-        int c = st.capacity();
+        size_t c = st.capacity();
         std::cout << a << " " << b << " " << c << std::endl;
     }
     st.push(65);
-    int a = st.capacity();
+    size_t a = st.capacity();
     int b = st.pop();
-    int c = st.capacity();
+    size_t c = st.capacity();
     
     std::cout << a << " " << b << " " << c << std::endl;
     
