@@ -1,0 +1,18 @@
+The C language:
+3 - stk.size 3 - stk.capacity
+2 - stk.size 2 - stk.capacity : after resize(-1, &stk)
+7 - stk.size 2 - stk.capacity : after resize(5, &stk)
+push(123, &stk)
+3 - capacity(&stk) before pop, 123 - pop(&stk), 2 - capacity(&stk) after pop, 7 - size(&stk)
+2 - capacity(&stk) before pop, 8 - pop(&stk), 1 - capacity(&stk) after pop, 7 - size(&stk)
+1 - capacity(&stk) before pop, 10 - pop(&stk), 0 - capacity(&stk) after pop, 7 - size(&stk)
+7 - stk.size 0 - stk.capacity
+The C++ language:
+Stack st (9, 6, 7)
+st.push(12) writes in terminal "There is no place in the stack. Resize it."
+3 - st.capacity(), 7 - st.pop(), 2 - st.capacity()
+2 - st.capacity(), 6 - st.pop(), 1 - st.capacity()
+1 - st.capacity(), 9 - st.pop(), 0 - st.capacity()
+st.push(65);
+1 - st.capacity(), 65 - st.pop(), 0 - st.capacity()
+0 - st.capacity(), 3 - st.size()
