@@ -3,7 +3,7 @@
 
 #include <gmp.h>
 
-char* fibonacciSum(int index) {
+char* fibonacciSumGmp(int index) {
     mpz_t sum;
     mpz_init(sum);
     mpz_set_ui(sum, 0);
