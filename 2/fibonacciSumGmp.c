@@ -21,9 +21,12 @@ char* fibonacciSum(int index) {
 }
 
 int main() {
-    int index;
+    FILE* test;
+    test = fopen("test.txt", "a");
 
-    printf("%s\n", fibonacciSum(1345));
+    fprintf(test, "Sum of first 1345 elements:\n%s\n", fibonacciSum(1345));
+
+    fclose(test);
 
     return 0;
 }
