@@ -3,33 +3,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct stack {
+typedef struct {
     size_t size;
     size_t capacity;
     int* elements;
-};
+} stack;
 
-struct stack create(size_t size, size_t capacity, int* x) {
-    struct stack stk;
+stack create(size_t size, size_t capacity, int* x) {
+    stack stk;
     stk.size = size;
-    stk.capacity = capacity;
-    stk.elements = x;
+    stk.capacity = size;
+
+    stk.elements = (int*)calloc(size, sizeof(int*));
+    if (!stk.elements) {
+        printf("Memory error\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    for (int i = 0; i < size; i++) {
+        stk.elements[i] = x[i];
+    }
     
     return stk;
 }
 
-void push(int x, struct stack* stk) {    
+void push(int x, stack* stk) {    
     if ( stk->capacity + 1 > stk->size ) {
         printf("No space in the stack. Resize it.\n");
         return;
     }
 
+    int index = stk->capacity;
     stk->capacity += 1;
-    int index = stk->capacity - 1;
     *(stk->elements + index) = x;
 }
 
-int pop(struct stack* stk) {
+int pop(stack* stk) {
     if ( stk->size == 0 || stk->capacity == 0 ) {
         printf("Empty or non-existing stack\n");
         exit(EXIT_FAILURE);
@@ -40,22 +49,32 @@ int pop(struct stack* stk) {
     return element;
 }
 
-size_t size(struct stack* stk) {
+size_t size(stack* stk) {
     return stk->size;
 }
 
-size_t capacity(struct stack* stk) {
+size_t capacity(stack* stk) {
     return stk->capacity;
 }
 
-void Resize(int x, struct stack* stk) {
+void Resize(int x, stack* stk) {
     if ( (int)stk->size + x <= 0 ) {
-        printf("Invalid resize parameter\n");
-        exit(EXIT_FAILURE);
+        free(stk->elements);
+        printf("Stack was destroyed.\n");
+        exit(EXIT_SUCCESS);
     }
     
     stk->size += x;
-    if ( stk->size < stk->capacity ) {
+    
+    if ( stk->capacity > stk->size ) {
         stk->capacity = stk->size;
+    }
+    
+    int* temp = (int*)realloc(stk->elements, stk->size*sizeof(int*));
+    if (temp) {
+        stk->elements = temp;
+    } else {
+        printf("Memory error\n");
+        exit(EXIT_FAILURE);
     }
 }

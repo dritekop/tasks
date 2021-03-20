@@ -6,7 +6,7 @@ int main() {
     int array[3] = { 10, 8, 7 };
     int length = sizeof(array)/sizeof(int);
     
-    struct stack stk = create(length, length, array);
+    stack stk = create(length, length, array);
 
     fprintf(test, "The C language:\n");
     fprintf(test, "%zu - stk.size %zu - stk.capacity\n", size(&stk), capacity(&stk));
