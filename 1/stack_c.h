@@ -70,7 +70,7 @@ void Resize(int x, stack* stk) {
         stk->capacity = stk->size;
     }
     
-    int* temp = (int*)realloc(stk->elements, stk->size*sizeof(int*));
+    int* temp = (int*)realloc(stk->elements, stk->size*sizeof(int));
     if (temp) {
         stk->elements = temp;
     } else {
