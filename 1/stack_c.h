@@ -14,13 +14,13 @@ stack create(size_t size, size_t capacity, int* x) {
     stk.size = size;
     stk.capacity = size;
 
-    stk.elements = (int*)calloc(size, sizeof(int*));
+    stk.elements = (int*)calloc(stk.size, sizeof(int));
     if (!stk.elements) {
         printf("Memory error\n");
         exit(EXIT_FAILURE);
     }
     
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < stk.size; i++) {
         stk.elements[i] = x[i];
     }
     
