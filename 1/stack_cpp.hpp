@@ -2,18 +2,22 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <memory>
 
 template <typename T>
 class Stack {
-    T* values;
     size_t Size;
     size_t Capacity;
+    std::unique_ptr<T[]> values;
 
 public:
     Stack(size_t size, T* array) {
         this->Size = size;
         this->Capacity = size;
-        this->values = array;
+        this->values = std::make_unique<T[]>(this->Size);
+        for (size_t i = 0; i < this->Size; i++) {
+            this->values[i] = array[i];
+        }
     };
 
     ~Stack() {};
@@ -55,13 +59,19 @@ public:
             exit(EXIT_FAILURE); 
         }
         this->Size = newSize;
-    
+        
+        T temp[this->Size];
+
+        for (size_t i; i < this->Size; i++) {
+            temp[i] = this->values[i];
+        }
+
+        this->values = std::make_unique<T[]>(this->Size);
+
+        for (size_t i; i < this->Size; i++) {
+            this->values[i] = temp[i];
+        }
     }
 
     Stack operator=(const Stack& stk) = delete;
 };
-
-template <typename T>
-Stack<T> create(size_t size, T* array) {
-    return Stack<T>(size, array);
-}

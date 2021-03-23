@@ -5,7 +5,7 @@ int main() {
     std::ofstream test;
 
     int x[] = { 9, 6, 7 };
-    Stack<int> st = create(3, x);
+    Stack<int> st(3, x);
 
     
     test.open("test.txt", std::ios_base::app);
@@ -33,7 +33,11 @@ int main() {
     test << st.capacity() << " - st.capacity(), " << st.size() <<
     " - st.size()" << std::endl;
 
-    test.close();
     // st.Resize(-12);
     // st.pop();
+    st.Resize(6);
+    test << st.capacity() << " - st.capacity(), " << st.size() <<
+    " - st.size() afrer st.Resize(6)" << std::endl;
+
+    test.close();
 }
