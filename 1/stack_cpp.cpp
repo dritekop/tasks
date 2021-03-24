@@ -37,7 +37,7 @@ int main() {
     // st.pop();
     st.Resize(6);
     test << st.capacity() << " - st.capacity(), " << st.size() <<
-    " - st.size() afrer st.Resize(6)" << std::endl;
+    " - st.size() after st.Resize(6)" << std::endl;
 
     test.close();
 }

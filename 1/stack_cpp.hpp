@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <memory>
+#include <utility>
 
 template <typename T>
 class Stack {
@@ -11,12 +12,12 @@ class Stack {
     std::unique_ptr<T[]> values;
 
 public:
-    Stack(size_t size, T* array) {
+    Stack(size_t size, T* arr) {
         this->Size = size;
         this->Capacity = size;
         this->values = std::make_unique<T[]>(this->Size);
         for (size_t i = 0; i < this->Size; i++) {
-            this->values[i] = array[i];
+            this->values[i] = arr[i];
         }
     };
 
@@ -60,17 +61,11 @@ public:
         }
         this->Size = newSize;
         
-        T temp[this->Size];
-
-        for (size_t i; i < this->Size; i++) {
-            temp[i] = this->values[i];
-        }
+        std::unique_ptr<T[]> temp = std::make_unique<T[]>(this->Size);
+        temp = std::move(this->values);
 
         this->values = std::make_unique<T[]>(this->Size);
-
-        for (size_t i; i < this->Size; i++) {
-            this->values[i] = temp[i];
-        }
+        this->values = std::move(temp);
     }
 
     Stack operator=(const Stack& stk) = delete;

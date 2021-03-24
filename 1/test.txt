@@ -16,4 +16,4 @@ st.push(12) writes in terminal "There is no place in the stack. Resize it."
 st.push(65);
 1 - st.capacity(), 65 - st.pop(), 0 - st.capacity()
 0 - st.capacity(), 3 - st.size()
-0 - st.capacity(), 9 - st.size() afrer st.Resize(6)
+0 - st.capacity(), 9 - st.size() after st.Resize(6)
